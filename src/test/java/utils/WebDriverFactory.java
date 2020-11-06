@@ -15,7 +15,7 @@ public class WebDriverFactory {
             case OPERA:
                 WebDriverManager.operadriver().setup();
             default:
-                return null;
+                throw  new IllegalStateException("browser name must be specified");
         }
     }
 }

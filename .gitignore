@@ -169,5 +169,5 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,intellij+iml,intellij+all
 
-EPAM/logs
-EPAM/target
+logs
+target

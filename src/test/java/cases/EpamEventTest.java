@@ -11,14 +11,17 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import pages.AncestorPage;
+import pages.MainPage;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class EpamEventTest {
+public class EpamEventTest  {
     WebDriver driver;
-    private static final Logger logger = LogManager.getLogger(EpamEventTest.class);
-    private final ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    public static final Logger logger = LogManager.getLogger(EpamEventTest.class);
+
+
 
     @SneakyThrows
     @BeforeEach
@@ -37,6 +40,7 @@ public class EpamEventTest {
         caps.setCapability("enableVideo", true);
         caps.setCapability("enableLog", true);
 
+
         driver = new RemoteWebDriver(new URL(slenoidURL), caps);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
@@ -48,6 +52,9 @@ public class EpamEventTest {
     @Description("Test OS Xiaomi VS Huawei")
     @Step("Start Test - Open Yandex Market")
     public void Open(){
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        logger.info("dd");
 
     }
 }

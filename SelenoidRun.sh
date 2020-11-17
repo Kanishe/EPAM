@@ -4,7 +4,7 @@
  if [ $? -eq 0 ]
   then
   echo "Selenoid is already running"
-  exit 666
+  exit 255
   else
   	open --background -a Docker
   	sleep 40

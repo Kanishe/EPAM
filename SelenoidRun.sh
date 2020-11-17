@@ -6,7 +6,6 @@
   echo "Selenoid is already running"
   exit 666
   else
-  	echo "Selenoid is already running"
   	open --background -a Docker
   	sleep 40
   	echo "Docker is start"

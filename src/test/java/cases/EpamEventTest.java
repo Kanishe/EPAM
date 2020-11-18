@@ -13,6 +13,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import pages.AncestorPage;
 import pages.MainPage;
+import utils.WebDriverFactory;
+import utils.WebDriverType;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -26,23 +28,24 @@ public class EpamEventTest  {
     @SneakyThrows
     @BeforeEach
     public void setUp() {
-//        String browser = System.getProperty("browser");
+        String browser = System.getProperty("chrome");
 //        logger.info(browser);
 //        WebDriverManager.chromedriver().setup();
 //        driver = new ChromeDriver();
 //        driver.manage().window().maximize();
-        String slenoidURL = "http://localhost:4444/wd/hub";
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setBrowserName("chrome");
-        caps.setVersion("85.0");
-        caps.setCapability("enableVNC", true);
-        caps.setCapability("screenResolution", "1280x1024");
-        caps.setCapability("enableVideo", true);
-        caps.setCapability("enableLog", true);
+//        String slenoidURL = "http://localhost:4444/wd/hub";
+//        DesiredCapabilities caps = new DesiredCapabilities();
+//        caps.setBrowserName("chrome");
+//        caps.setVersion("85.0");
+//        caps.setCapability("enableVNC", true);
+//        caps.setCapability("screenResolution", "1280x1024");
+//        caps.setCapability("enableVideo", true);
+//        caps.setCapability("enableLog", true);
+        driver=WebDriverFactory.createDriver(WebDriverType.CHROME);
 
-
-        driver = new RemoteWebDriver(new URL(slenoidURL), caps);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
     }
 
     @Test
@@ -52,8 +55,6 @@ public class EpamEventTest  {
     @Description("Test OS Xiaomi VS Huawei")
     @Step("Start Test - Open Yandex Market")
     public void Open(){
-        MainPage mainPage = new MainPage(driver);
-        mainPage.open();
         logger.info("dd");
 
     }

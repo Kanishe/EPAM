@@ -21,6 +21,7 @@ public class MainPage extends AncestorPage{
     public MainPage(WebDriver driver) {
         super(driver);
     }
+    @Step("Main page EPAM app is open")
     public MainPage open (){
         driver.get(cfg.url());
         logger.info("Event EPAM page is open - " + cfg.url());

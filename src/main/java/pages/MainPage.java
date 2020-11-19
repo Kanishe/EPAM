@@ -14,6 +14,7 @@ public class MainPage extends AncestorPage{
     }
     public MainPage open (){
         driver.get(cfg.url());
+        logger.info("Event EPAM page is open" + cfg.url());
         return this;
     }
 }

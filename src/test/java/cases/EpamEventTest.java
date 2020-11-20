@@ -44,8 +44,7 @@ public class EpamEventTest {
     public void viewingUpcomingActivities() {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen();
-
-
+        eventPage.ClickToUpcomingEventButton();
     }
 
 

@@ -18,6 +18,25 @@ public class EventPage extends AncestorPage {
     @FindBy(xpath = "//div[@class='evnt-events-column cell-3']")
     public static List<WebElement> quantityUpcomingEventOnPage;
 
+    @FindBy(xpath = "//div[@class='evnt-event-details-table']/div[@class='evnt-details-cell online-cell']")
+    public static WebElement venue;
+
+    @FindBy(xpath = "//p[@class = 'language']")
+    public static WebElement languageOfEvent;
+
+    @FindBy(xpath = "//div[@class = 'evnt-card-body']//h1")
+    public static WebElement eventTitle;
+
+    @FindBy(xpath = "//div[@class = 'evnt-dates-cell dates']")
+    public static WebElement dateOfEvent;
+
+    @FindBy(xpath = "//span[@class = 'status free-attend']")
+    public static WebElement regStatus;
+
+    @FindBy(xpath = "//div[@class = 'evnt-card-footer']//div[@class = 'evnt-people-cell speakers']")
+    public static WebElement listOfSpeakers;
+
+
     public EventPage(WebDriver driver) {
         super(driver);
     }
@@ -44,6 +63,47 @@ public class EventPage extends AncestorPage {
         logger.info("Number of elements on Page Upcoming Events = " + numberOfUpcomingEventsOnPage);
         return numberOfUpcomingEventsOnPage;
     }
+    @Step("Get the location of the event from the card")
+    public WebElement getCardLocation(){
+        venue.getText();
+        logger.info(venue.getText());
+        logger.info("Location of the event from the card is - "+venue.getText() );
+        return venue;
+    }
+    @Step("Get the language of the event from the card")
+    public WebElement getLanguageOfEvent(){
+        languageOfEvent.getText();
+        logger.info("Language of the event from the card is - "+ languageOfEvent.getText());
+        return languageOfEvent;
+    }
+    @Step("Get the event title of the event from the card")
+    public WebElement getEventTitle(){
+        eventTitle.getText();
+        logger.info("Event Title of the event from the card is - "+ eventTitle.getText());
+        return eventTitle;
+    }
+
+    @Step("Get date of the event from the card")
+    public WebElement getDateOfEvent(){
+        dateOfEvent.getText();
+        logger.info("Event date of the event from the car event is - "+ dateOfEvent.getText());
+        return dateOfEvent;
+    }
+
+    @Step("Get registration status information of the event from the card")
+    public WebElement getRegStatusOfEvent(){
+        regStatus.getText();
+        logger.info("Event date of the event from the car event is - "+ regStatus.getText());
+        return regStatus;
+    }
+
+    @Step("Get list of speakers of the event from the card")
+    public WebElement getListOfSpeakers(){
+        listOfSpeakers.getText();
+        logger.info("List of speakers of the event from the car event is - "+ listOfSpeakers.getText());
+        return listOfSpeakers;
+    }
+
 
 
 

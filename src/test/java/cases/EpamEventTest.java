@@ -16,7 +16,9 @@ import utils.WebDriverType;
 
 import java.util.concurrent.TimeUnit;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EpamEventTest {
@@ -55,13 +57,33 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying that the card contains information (venue • language • name of event • date of event • registration information • list of speakers) about the event")
-    public void viewingEventCards(){
+    public void viewingEventCards() {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
-        .clickToUpcomingEventButton();
-
+                .clickToUpcomingEventButton();
+        assertNotNull(eventPage.getCardLocation());
+        assertNotNull(eventPage.getLanguageOfEvent());
+        assertNotNull(eventPage.getEventTitle());
+        assertNotNull(eventPage.getDateOfEvent());
+        assertNotNull(eventPage.getRegStatusOfEvent());
+        assertNotNull(eventPage.getListOfSpeakers());
+        logger.info("Card contains all necessary information. Test viewingEventCards is passed");
 
     }
+    @Order(3)
+    @Test
+    @Epic("Extend business EPAM")
+    @Feature("EventsEPAM")
+    @Story("Extend events EPAM")
+    @Description("This case verifying verifying dates for upcoming events")
+    public void verifyingDatesForUpcomingEvents(){
+
+    }
+
+
+
+
+
 
     @AfterEach
     public void tearDown() {

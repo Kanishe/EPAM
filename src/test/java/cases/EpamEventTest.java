@@ -7,10 +7,7 @@ import io.qameta.allure.Story;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import pages.EventPage;
 import pages.MainPage;
@@ -21,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EpamEventTest {
     private static MainPage mainPage;
     WebDriver driver;
@@ -35,6 +33,7 @@ public class EpamEventTest {
         mainPage.open();
     }
 
+    @Order(1)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
@@ -48,6 +47,20 @@ public class EpamEventTest {
         int numberOfUpcomingEventsOnPage = eventPage.countNumberOfUpcomingEventsOnPage();
         assertEquals(numberOfUpcomingEventsOnPage,numberOfUpcomingEventsOnButton);
         logger.info("Number of cards is equal to the counter on the Upcoming Events button. Test viewingUpcomingActivities is passed" );
+    }
+
+    @Order(2)
+    @Test
+    @Epic("Extend business EPAM")
+    @Feature("EventsEPAM")
+    @Story("Extend events EPAM")
+    @Description("This case verifying that the card contains information (venue • language • name of event • date of event • registration information • list of speakers) about the event")
+    public void viewingEventCards(){
+        EventPage eventPage = new EventPage(driver);
+        mainPage.eventPageOpen()
+        .clickToUpcomingEventButton();
+
+
     }
 
     @AfterEach

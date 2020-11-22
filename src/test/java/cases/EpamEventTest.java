@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,8 @@ import utils.WebDriverFactory;
 import utils.WebDriverType;
 
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EpamEventTest {
     private static MainPage mainPage;
@@ -39,8 +42,12 @@ public class EpamEventTest {
     @Description("This case verifying The page displays cards for upcoming events and the number of cards is equal to the counter on the 'Upcoming Events' button")
     public void viewingUpcomingActivities() {
         EventPage eventPage = new EventPage(driver);
-        mainPage.eventPageOpen();
-        eventPage.ClickToUpcomingEventButton();
+        mainPage.eventPageOpen()
+                .clickToUpcomingEventButton();
+        int numberOfUpcomingEventsOnButton = eventPage.countNumberOfUpcomingEventsOnButton();
+        int numberOfUpcomingEventsOnPage = eventPage.countNumberOfUpcomingEventsOnPage();
+        assertEquals(numberOfUpcomingEventsOnPage,numberOfUpcomingEventsOnButton);
+        logger.info("Number of cards is equal to the counter on the Upcoming Events button. Test viewingUpcomingActivities is passed" );
     }
 
     @AfterEach

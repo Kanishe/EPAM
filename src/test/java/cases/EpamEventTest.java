@@ -91,7 +91,8 @@ public class EpamEventTest {
     @Description("This case verifying The page displays cards of past events. The number of cards is equal to the counter on the Past Events button")
     public void viewPastEventsInCanada(){
         EventPage eventPage = new EventPage(driver);
-        mainPage.eventPageOpen();
+        mainPage.eventPageOpen()
+                .clickToPastEventButton();
 
     }
 

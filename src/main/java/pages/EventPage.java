@@ -51,6 +51,9 @@ public class EventPage extends AncestorPage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/section[3]/div/div/div[2]/div/div[1]/div/div/div/a/div/div[2]/div/div[2]/div/div/p/span[1]")
     public static WebElement dateOnCardUpcomingEventInBlockThisWeek;
 
+    @FindBy(xpath = "//span[@class = 'evnt-tab-text desktop' and text () = 'Past Events']")
+    public static WebElement pastEventButton;
+
 
     public EventPage(WebDriver driver) {
         super(driver);
@@ -59,6 +62,12 @@ public class EventPage extends AncestorPage {
     public EventPage clickToUpcomingEventButton() {
         upcomingEventButton.click();
         logger.info("click to Upcoming EventButton");
+        return this;
+    }
+    @Step("click to Past EventButton")
+    public EventPage clickToPastEventButton() {
+        pastEventButton.click();
+        logger.info("click to Past EventButton");
         return this;
     }
 

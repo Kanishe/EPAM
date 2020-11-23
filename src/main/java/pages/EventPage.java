@@ -6,7 +6,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.ByteArrayInputStream;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EventPage extends AncestorPage {
     @FindBy(xpath = "//span[@class = 'evnt-tab-text desktop' and text () = 'Upcoming events']")
@@ -35,6 +40,9 @@ public class EventPage extends AncestorPage {
 
     @FindBy(xpath = "//div[@class = 'evnt-card-footer']//div[@class = 'evnt-people-cell speakers']")
     public static WebElement listOfSpeakers;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/section[3]/div/div/div[2]/div/div[1]/div/div/div/a/div/div[2]/div/div[2]/div/div/p/span[1]")
+    public static WebElement dateOnCardUpcomingEventInBlockThisWeek;
 
 
     public EventPage(WebDriver driver) {
@@ -104,10 +112,20 @@ public class EventPage extends AncestorPage {
         return listOfSpeakers;
     }
 
-    @Step("Check ")
-    public WebElement comperingDateInUpcomingEvent(){
-        return null;
-    }
+//    @Step("Check date in card on Page UpcomingEvent ")
+//    public void comperingDateInUpcomingEvent(){
+//        String dateOfThisWeekEventText = dateOfTheEvent.getText();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH);
+//        LocalDate dateOfThisWeekEvent = LocalDate.parse(dateOfThisWeekEventText, formatter);
+//        LocalDate today = LocalDate.now();
+//        LocalDate mondayOfThisWeek = today.with(previousOrSame(MONDAY));
+//        LocalDate sundayOfThisWeek = today.with(nextOrSame(SUNDAY));
+//        boolean isAfterMondayOfThisWeek = dateOfThisWeekEvent.isAfter(mondayOfThisWeek);
+//        boolean isBeforeMondayOfThisWeek = dateOfThisWeekEvent.isBefore(sundayOfThisWeek);
+//
+//        assertTrue(isAfterMondayOfThisWeek);
+//        assertTrue(isBeforeMondayOfThisWeek);
+//    }
 
 
 

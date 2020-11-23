@@ -16,7 +16,6 @@ import utils.WebDriverType;
 
 import java.util.concurrent.TimeUnit;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -77,9 +76,11 @@ public class EpamEventTest {
     @Story("Extend events EPAM")
     @Description("This case verifying verifying dates for upcoming events")
     public void verifyingDatesForUpcomingEvents(){
-        EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToUpcomingEventButton();
+
+
+
 
     }
 

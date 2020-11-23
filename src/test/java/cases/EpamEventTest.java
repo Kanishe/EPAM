@@ -77,6 +77,9 @@ public class EpamEventTest {
     @Story("Extend events EPAM")
     @Description("This case verifying verifying dates for upcoming events")
     public void verifyingDatesForUpcomingEvents(){
+        EventPage eventPage = new EventPage(driver);
+        mainPage.eventPageOpen()
+                .clickToUpcomingEventButton();
 
     }
 

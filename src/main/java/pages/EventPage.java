@@ -93,7 +93,7 @@ public class EventPage extends AncestorPage {
     @Step("Get registration status information of the event from the card")
     public WebElement getRegStatusOfEvent(){
         regStatus.getText();
-        logger.info("Event date of the event from the car event is - "+ regStatus.getText());
+        logger.info("Event registration status from the car event is - "+ regStatus.getText());
         return regStatus;
     }
 
@@ -102,6 +102,11 @@ public class EventPage extends AncestorPage {
         listOfSpeakers.getText();
         logger.info("List of speakers of the event from the car event is - "+ listOfSpeakers.getText());
         return listOfSpeakers;
+    }
+
+    @Step("Check ")
+    public WebElement comperingDateInUpcomingEvent(){
+        return null;
     }
 
 

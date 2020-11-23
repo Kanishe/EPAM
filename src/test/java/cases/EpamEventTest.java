@@ -74,13 +74,24 @@ public class EpamEventTest {
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
-    @Description("This case verifying verifying dates for upcoming events")
+    @Description("This case verifying dates for upcoming events")
     public void verifyingDatesForUpcomingEvents(){
+        EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToUpcomingEventButton();
+        eventPage.comperingDateInUpcomingEvent();
 
+    }
 
-
+    @Order(4)
+    @Test
+    @Epic("Extend business EPAM")
+    @Feature("EventsEPAM")
+    @Story("Extend events EPAM")
+    @Description("This case verifying The page displays cards of past events. The number of cards is equal to the counter on the Past Events button")
+    public void viewPastEventsInCanada(){
+        EventPage eventPage = new EventPage(driver);
+        mainPage.eventPageOpen();
 
     }
 

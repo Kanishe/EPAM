@@ -6,14 +6,21 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.ByteArrayInputStream;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.temporal.TemporalAdjusters.nextOrSame;
+import static java.time.temporal.TemporalAdjusters.previousOrSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EventPage extends AncestorPage {
+
     @FindBy(xpath = "//span[@class = 'evnt-tab-text desktop' and text () = 'Upcoming events']")
     public static WebElement upcomingEventButton;
 
@@ -112,20 +119,19 @@ public class EventPage extends AncestorPage {
         return listOfSpeakers;
     }
 
-//    @Step("Check date in card on Page UpcomingEvent ")
-//    public void comperingDateInUpcomingEvent(){
-//        String dateOfThisWeekEventText = dateOfTheEvent.getText();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH);
-//        LocalDate dateOfThisWeekEvent = LocalDate.parse(dateOfThisWeekEventText, formatter);
-//        LocalDate today = LocalDate.now();
-//        LocalDate mondayOfThisWeek = today.with(previousOrSame(MONDAY));
-//        LocalDate sundayOfThisWeek = today.with(nextOrSame(SUNDAY));
-//        boolean isAfterMondayOfThisWeek = dateOfThisWeekEvent.isAfter(mondayOfThisWeek);
-//        boolean isBeforeMondayOfThisWeek = dateOfThisWeekEvent.isBefore(sundayOfThisWeek);
-//
-//        assertTrue(isAfterMondayOfThisWeek);
-//        assertTrue(isBeforeMondayOfThisWeek);
-//    }
+    @Step("Check date in card on Page UpcomingEvent ")/////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<??????????????
+    public void comperingDateInUpcomingEvent(){
+        String dateOfThisWeekEventText = dateOnCardUpcomingEventInBlockThisWeek.getText();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH);
+        LocalDate dateOfThisWeekEvent = LocalDate.parse(dateOfThisWeekEventText, formatter);
+        LocalDate today = LocalDate.now();
+        LocalDate mondayOfThisWeek = today.with(previousOrSame(MONDAY));
+        LocalDate sundayOfThisWeek = today.with(nextOrSame(DayOfWeek.SUNDAY));
+        boolean isAfterMondayOfThisWeek = dateOfThisWeekEvent.isAfter(mondayOfThisWeek);
+        boolean isBeforeMondayOfThisWeek = dateOfThisWeekEvent.isBefore(sundayOfThisWeek);
+        assertTrue(isAfterMondayOfThisWeek);
+        assertTrue(isBeforeMondayOfThisWeek);
+    }
 
 
 

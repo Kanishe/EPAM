@@ -6,6 +6,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.ByteArrayInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -141,6 +143,19 @@ public class EventPage extends AncestorPage {
         assertTrue(isAfterMondayOfThisWeek);
         assertTrue(isBeforeMondayOfThisWeek);
     }
+
+    @Step("Check date in card on Page UpcomingEvent ")/////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<??????????????
+    public Date comperingDateInUpcomingEvent2() throws ParseException {
+        return new SimpleDateFormat("dd MM yyyy").parse(dateOnCardUpcomingEventInBlockThisWeek.getText());
+    }
+
+    @Step ("Count past event on the 'label small white")
+    public int countNumberOfPastEventsOnPage(){
+
+        return countNumberOfPastEventsOnPage();
+    }
+
+
 
 
 

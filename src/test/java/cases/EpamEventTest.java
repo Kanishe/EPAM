@@ -14,6 +14,8 @@ import pages.MainPage;
 import utils.WebDriverFactory;
 import utils.WebDriverType;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,11 +77,15 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying dates for upcoming events")
-    public void verifyingDatesForUpcomingEvents(){
+    public void verifyingDatesForUpcomingEvents() throws ParseException {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToUpcomingEventButton();
         eventPage.comperingDateInUpcomingEvent();
+//        Date eventCardDate=eventPage.comperingDateInUpcomingEvent2();
+//        assertThat(eventCardDate, before(Moments.today()));
+        logger.info("Dates of the events are less than the current date");
+
 
     }
 

@@ -3,7 +3,10 @@ package pages;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.ByteArrayInputStream;
 import java.text.ParseException;
@@ -32,6 +35,9 @@ public class EventPage extends AncestorPage {
     @FindBy(xpath = "//div[@class='evnt-events-column cell-3']")
     public static List<WebElement> quantityUpcomingEventOnPage;
 
+    @FindBy(xpath="//div[@class='evnt-events-column cell-3']")
+    public static List<WebElement> quantityPastEventsOnPage;
+
     @FindBy(xpath = "//div[@class='evnt-event-details-table']/div[@class='evnt-details-cell online-cell']")
     public static WebElement venue;
 
@@ -56,6 +62,16 @@ public class EventPage extends AncestorPage {
     @FindBy(xpath = "//span[@class = 'evnt-tab-text desktop' and text () = 'Past Events']")
     public static WebElement pastEventButton;
 
+    @FindBy(xpath = "//div[@class = 'evnt-filter-button evnt-button btn dropdown-toggle']/span[contains(text(),'Location')]")
+    public static WebElement locationFilter;
+
+    @FindBy(xpath = "//label[@data-value = 'Canada' ]")
+    public static WebElement checkBoxCanada;
+
+
+
+
+
 
     public EventPage(WebDriver driver) {
         super(driver);
@@ -63,15 +79,16 @@ public class EventPage extends AncestorPage {
     @Step("click to Upcoming EventButton")
     public EventPage clickToUpcomingEventButton() {
         upcomingEventButton.click();
-        logger.info("click to Upcoming EventButton");
+        logger.info("clicked to Upcoming EventButton");
         return this;
     }
-    @Step("click to Past EventButton")
-    public EventPage clickToPastEventButton() {
-        pastEventButton.click();
-        logger.info("click to Past EventButton");
+    @Step("clicked to Location Filter")
+    public EventPage clickToLocationFilter() {
+        locationFilter.click();
+        logger.info("clicked to Location Filter");
         return this;
     }
+
 
     @Step("Count upcoming event on the 'label small white'")
     public int countNumberOfUpcomingEventsOnButton(){
@@ -149,11 +166,35 @@ public class EventPage extends AncestorPage {
         return new SimpleDateFormat("dd MM yyyy").parse(dateOnCardUpcomingEventInBlockThisWeek.getText());
     }
 
-    @Step ("Count past event on the 'label small white")
-    public int countNumberOfPastEventsOnPage(){
-
-        return countNumberOfPastEventsOnPage();
+    @Step("click to Past EventButton")
+    public EventPage clickToPastEventButton(WebElement webElement) {
+        new WebDriverWait(driver, 40).
+                until(ExpectedConditions.elementToBeClickable(pastEventButton)).click();
+//        pastEventButton.click();
+        logger.info("clicked to Past EventButton");
+        return this;
     }
+
+    @Step("Clicked to check box Canada")
+    public EventPage clickToCheckBoxCanada(WebElement checkBoxCanada){
+        new WebDriverWait(driver, 40).
+                until(ExpectedConditions.elementToBeClickable(checkBoxCanada)).click();
+        logger.info("Clicked to check box Canada - "+ listOfSpeakers.getText());
+        return this;
+    }
+
+    @Step("Count upcoming event on Page Past Events")
+    public int countNumberOfPastEventsOnPage() {
+        int numberPastEventsOnPage = quantityPastEventsOnPage.size();
+        Allure.addAttachment("Number of elements on Page Past Events", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+        logger.info("Number of elements on Page Past Events = " + numberPastEventsOnPage);
+        return numberPastEventsOnPage;
+    }
+//    @Step ("Count past event on the 'label small white")
+//    public int countNumberOfPastEventsOnPage(){
+//
+//        return countNumberOfPastEventsOnPage();
+//    }
 
 
 

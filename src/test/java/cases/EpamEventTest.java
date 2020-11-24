@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import lombok.SneakyThrows;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
@@ -20,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static pages.EventPage.checkBoxCanada;
+import static pages.EventPage.pastEventButton;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EpamEventTest {
@@ -36,7 +39,7 @@ public class EpamEventTest {
         mainPage.open();
     }
 
-    @Order(1)
+    @Order(4)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
@@ -71,6 +74,7 @@ public class EpamEventTest {
         logger.info("Card contains all necessary information. Test viewingEventCards is passed");
 
     }
+
     @Order(3)
     @Test
     @Epic("Extend business EPAM")
@@ -89,7 +93,7 @@ public class EpamEventTest {
 
     }
 
-    @Order(4)
+    @Order(1)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
@@ -98,8 +102,10 @@ public class EpamEventTest {
     public void viewPastEventsInCanada(){
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
-                .clickToPastEventButton();
-
+                .clickToPastEventButton(pastEventButton);
+        eventPage.clickToLocationFilter()
+                .clickToCheckBoxCanada(checkBoxCanada)
+                .countNumberOfPastEventsOnPage();
     }
 
 

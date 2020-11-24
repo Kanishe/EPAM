@@ -5,9 +5,9 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import lombok.SneakyThrows;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.exparity.hamcrest.date.Moments;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import pages.EventPage;
@@ -19,10 +19,13 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static org.exparity.hamcrest.date.IsBefore.before;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static pages.EventPage.checkBoxCanada;
 import static pages.EventPage.pastEventButton;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EpamEventTest {
@@ -99,7 +102,7 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying The page displays cards of past events. The number of cards is equal to the counter on the Past Events button")
-    public void viewPastEventsInCanada(){
+    public void viewPastEventsInCanada() throws ParseException {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToPastEventButton(pastEventButton);
@@ -108,6 +111,10 @@ public class EpamEventTest {
         int quantityOnButton = eventPage.countNumberOfPastEventsOnButton();
         int quantityOnOnPage = eventPage.countNumberOfPastEventsOnPage();
         assertEquals(quantityOnButton,quantityOnOnPage);
+        logger.info("Number of cards is equal to the counter on the pass Events button" );
+        Date dateEvent = eventPage.dateOfEvent();
+        assertThat(dateEvent,before(Moments.today()));
+        logger.info("Dates of the events held are less than the current date. Test viewPastEventsInCanada is passed" );
 
     }
 

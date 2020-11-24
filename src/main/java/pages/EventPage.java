@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.ByteArrayInputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -204,7 +205,25 @@ public class EventPage extends AncestorPage {
         return Integer.parseInt(quantityPastEventOnButton.getText());
     }
 
+    @FindBy(xpath = "//div[@class = 'evnt-dates-cell dates']")
+    public static WebElement dateOnCardPassEventInBlockThisWeek;
 
+//    @Step("ddd")//TODO подумать над сравниенем
+//    public Date sysDay(){
+//        DateFormat dateFormat = new SimpleDateFormat("dd - dd MMM yyyy");
+//        Date sysDate = new Date();
+//        dateFormat.format(sysDate);
+//        logger.info(sysDate);
+//        return sysDate;
+//    }
+
+    @Step("a")
+    public Date dateOfEvent() throws ParseException {
+        String strDate  = dateOnCardPassEventInBlockThisWeek.getText();
+        Date cardDate = new SimpleDateFormat("dd - dd MMM yyyy").parse(strDate);
+        logger.info(cardDate);
+        return cardDate;
+    }
 
 
 

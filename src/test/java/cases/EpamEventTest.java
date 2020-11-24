@@ -20,18 +20,17 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.exparity.hamcrest.date.IsBefore.before;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static pages.EventPage.checkBoxCanada;
 import static pages.EventPage.pastEventButton;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EpamEventTest {
+    public static final Logger logger = LogManager.getLogger(EpamEventTest.class);
     private static MainPage mainPage;
     WebDriver driver;
-    public static final Logger logger = LogManager.getLogger(EpamEventTest.class);
 
     @SneakyThrows
     @BeforeEach
@@ -92,8 +91,6 @@ public class EpamEventTest {
 //        Date eventCardDate=eventPage.comperingDateInUpcomingEvent2();
 //        assertThat(eventCardDate, before(Moments.today()));
         logger.info("Dates of the events are less than the current date");
-
-
     }
 
     @Order(4)
@@ -111,10 +108,22 @@ public class EpamEventTest {
         int quantityOnButton = eventPage.countNumberOfPastEventsOnButton();
         int quantityOnOnPage = eventPage.countNumberOfPastEventsOnPage();
         assertEquals(quantityOnButton,quantityOnOnPage);
-        logger.info("Number of cards is equal to the counter on the pass Events button" );
+        logger.info("Number of cards is equal to the counter on the pass Events button. Test viewPastEventsInCanada is passed" );
         Date dateEvent = eventPage.dateOfEvent();
         assertThat(dateEvent,before(Moments.today()));
-        logger.info("Dates of the events held are less than the current date. Test viewPastEventsInCanada is passed" );
+        logger.info("Number of cards is equal to the counter on the pass Events button. Test viewPastEventsInCanada is passed" );
+    }
+
+    @Order(5)
+    @Test
+    @Epic("Extend business EPAM")
+    @Feature("EventsEPAM")
+    @Story("Extend events EPAM")
+    @Description("This case verifying that the card contains detailed  information")
+    public void viewingDetailedInformationAboutEvent() {
+        EventPage eventPage = new EventPage(driver);
+        mainPage.eventPageOpen()
+                .clickToUpcomingEventButton();
 
     }
 

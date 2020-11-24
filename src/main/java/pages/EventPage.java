@@ -217,12 +217,18 @@ public class EventPage extends AncestorPage {
 //        return sysDate;
 //    }
 
-    @Step("a")
+    @Step("Take data venue in card ")
     public Date dateOfEvent() throws ParseException {
         String strDate  = dateOnCardPassEventInBlockThisWeek.getText();
         Date cardDate = new SimpleDateFormat("dd - dd MMM yyyy").parse(strDate);
         logger.info(cardDate);
         return cardDate;
+    }
+
+    @Step("Open detailed information about event")
+    public WebElement clickToEvevnt(){
+
+        return null;
     }
 
 

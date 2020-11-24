@@ -120,10 +120,11 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying that the card contains detailed  information")
-    public void viewingDetailedInformationAboutEvent() {
+    public void viewingDetailedInformationAboutEvent() throws InterruptedException {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToUpcomingEventButton();
+        eventPage.clickToEvent();
 
     }
 

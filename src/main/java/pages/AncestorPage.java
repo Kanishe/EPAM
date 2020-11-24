@@ -19,8 +19,8 @@ public abstract class AncestorPage {
         PageFactory.initElements(driver,this);
     }
 //
-    protected boolean ExplicitWaitElement(WebElement element) {
+    protected WebElement explicitWaitElement(WebElement element) {
         return new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.invisibilityOf(element));
+                .until(ExpectedConditions.visibilityOf(element));
     }
 }

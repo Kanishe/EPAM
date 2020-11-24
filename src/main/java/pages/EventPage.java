@@ -2,6 +2,7 @@ package pages;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
+import lombok.SneakyThrows;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -74,6 +75,13 @@ public class EventPage extends AncestorPage {
 
     @FindBy(xpath = "//label[@data-value = 'Canada' ]")
     public static WebElement checkBoxCanada;
+
+
+    @FindBy(xpath ="//div[@class = 'evnt-events-column cell-3']" )
+    public static WebElement bodyEvent;
+
+
+
 
 
 
@@ -225,10 +233,16 @@ public class EventPage extends AncestorPage {
         return cardDate;
     }
 
+    @SneakyThrows
     @Step("Open detailed information about event")
-    public WebElement clickToEvevnt(){
-
-        return null;
+    public WebElement clickToEvent(){
+        JavascriptExecutor jsscroll = (JavascriptExecutor) driver;
+        jsscroll.executeScript("window.scrollBy(0,1000)");
+        Allure.addAttachment("Click to any Event", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+//        logger.info(explicitWaitElement(bodyEvent).getText());
+        explicitWaitElement(bodyEvent).click();
+//        bodyEvent.getText()
+        return bodyEvent ;
     }
 
 

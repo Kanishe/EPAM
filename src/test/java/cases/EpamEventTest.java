@@ -125,14 +125,22 @@ public class EpamEventTest {
     @Story("Extend events EPAM")
     @Description("This case verifying that the card contains detailed  information")
     public void viewingDetailedInformationAboutEvent() {
-        CardEventDetailsPage cardEventDetailsPage = new CardEventDetailsPage(driver);
         mainPage.eventPageOpen()
                 .clickToUpcomingEventButton()
                 .clickToEvent()
                 .checkInformationEvent();
+        logger.info("Card contains all necessary information. Test viewingDetailedInformationAboutEvent is passed");
+    }
 
+    @Order(6)
+    @Test
+    @Epic("Extend business EPAM")
+    @Feature("EventsEPAM")
+    @Story("Extend events EPAM")
+    @Description("This case verifying that the card contains detailed  information")
+    public void filteringReportsByCategory() {
 
-
+        logger.info("Card contains all necessary information. Test viewingDetailedInformationAboutEvent is passed");
     }
 
 

@@ -39,7 +39,7 @@ public class EpamEventTest {
         mainPage.open();
     }
 
-    @Order(4)
+    @Order(1)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
@@ -93,7 +93,7 @@ public class EpamEventTest {
 
     }
 
-    @Order(1)
+    @Order(4)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
@@ -104,8 +104,11 @@ public class EpamEventTest {
         mainPage.eventPageOpen()
                 .clickToPastEventButton(pastEventButton);
         eventPage.clickToLocationFilter()
-                .clickToCheckBoxCanada(checkBoxCanada)
-                .countNumberOfPastEventsOnPage();
+                .clickToCheckBoxCanada(checkBoxCanada);
+        int quantityOnButton = eventPage.countNumberOfPastEventsOnButton();
+        int quantityOnOnPage = eventPage.countNumberOfPastEventsOnPage();
+        assertEquals(quantityOnButton,quantityOnOnPage);
+
     }
 
 

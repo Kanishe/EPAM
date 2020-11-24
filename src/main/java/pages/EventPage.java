@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
@@ -32,11 +33,16 @@ public class EventPage extends AncestorPage {
     @FindBy(xpath = "//a[@class = 'evnt-tab-link nav-link active']//span[@class ='evnt-tab-counter evnt-label small white']")
     public static WebElement quantityUpcomingEventOnButton;
 
+
+    @FindBy(xpath="//a[@class = 'evnt-tab-link nav-link active']//span[@class ='evnt-tab-counter evnt-label small white']")
+    public static WebElement quantityPastEventOnButton;
+
     @FindBy(xpath = "//div[@class='evnt-events-column cell-3']")
     public static List<WebElement> quantityUpcomingEventOnPage;
 
     @FindBy(xpath="//div[@class='evnt-events-column cell-3']")
     public static List<WebElement> quantityPastEventsOnPage;
+
 
     @FindBy(xpath = "//div[@class='evnt-event-details-table']/div[@class='evnt-details-cell online-cell']")
     public static WebElement venue;
@@ -183,18 +189,20 @@ public class EventPage extends AncestorPage {
         return this;
     }
 
-    @Step("Count upcoming event on Page Past Events")
+    @Step("Count Past event on Page Events")
     public int countNumberOfPastEventsOnPage() {
         int numberPastEventsOnPage = quantityPastEventsOnPage.size();
         Allure.addAttachment("Number of elements on Page Past Events", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         logger.info("Number of elements on Page Past Events = " + numberPastEventsOnPage);
         return numberPastEventsOnPage;
     }
-//    @Step ("Count past event on the 'label small white")
-//    public int countNumberOfPastEventsOnPage(){
-//
-//        return countNumberOfPastEventsOnPage();
-//    }
+
+    @Step("Count past event on the 'label small white'")
+    public int countNumberOfPastEventsOnButton(){
+        Allure.addAttachment("Number of elements on the counter 'label small white", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+        logger.info("Number of elements on the counter 'label small white' = " + quantityPastEventOnButton.getText());
+        return Integer.parseInt(quantityPastEventOnButton.getText());
+    }
 
 
 

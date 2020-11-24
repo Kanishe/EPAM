@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.exparity.hamcrest.date.Moments;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import pages.CardEventDetailsPage;
 import pages.EventPage;
 import pages.MainPage;
 import utils.WebDriverFactory;
@@ -21,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.exparity.hamcrest.date.IsBefore.before;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static pages.EventPage.checkBoxCanada;
@@ -83,7 +86,7 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying dates for upcoming events")
-    public void verifyingDatesForUpcomingEvents() throws ParseException {
+    public void verifyingDatesForUpcomingEvents() {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToUpcomingEventButton();
@@ -93,13 +96,14 @@ public class EpamEventTest {
         logger.info("Dates of the events are less than the current date");
     }
 
+    @SneakyThrows
     @Order(4)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying The page displays cards of past events. The number of cards is equal to the counter on the Past Events button")
-    public void viewPastEventsInCanada() throws ParseException {
+    public void viewPastEventsInCanada()  {
         EventPage eventPage = new EventPage(driver);
         mainPage.eventPageOpen()
                 .clickToPastEventButton(pastEventButton);
@@ -120,11 +124,14 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying that the card contains detailed  information")
-    public void viewingDetailedInformationAboutEvent() throws InterruptedException {
-        EventPage eventPage = new EventPage(driver);
+    public void viewingDetailedInformationAboutEvent() {
+        CardEventDetailsPage cardEventDetailsPage = new CardEventDetailsPage(driver);
         mainPage.eventPageOpen()
-                .clickToUpcomingEventButton();
-        eventPage.clickToEvent();
+                .clickToUpcomingEventButton()
+                .clickToEvent()
+                .checkInformationEvent();
+
+
 
     }
 

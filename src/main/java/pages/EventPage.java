@@ -235,14 +235,14 @@ public class EventPage extends AncestorPage {
 
     @SneakyThrows
     @Step("Open detailed information about event")
-    public WebElement clickToEvent(){
+    public CardEventDetailsPage clickToEvent(){
         JavascriptExecutor jsscroll = (JavascriptExecutor) driver;
         jsscroll.executeScript("window.scrollBy(0,1000)");
         Allure.addAttachment("Click to any Event", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
-//        logger.info(explicitWaitElement(bodyEvent).getText());
+        logger.info(explicitWaitElement(bodyEvent).getText());
         explicitWaitElement(bodyEvent).click();
 //        bodyEvent.getText()
-        return bodyEvent ;
+        return new CardEventDetailsPage(driver);
     }
 
 

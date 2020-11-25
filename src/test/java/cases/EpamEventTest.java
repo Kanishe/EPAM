@@ -139,10 +139,12 @@ public class EpamEventTest {
     @Feature("EventsEPAM")
     @Story("Extend events EPAM")
     @Description("This case verifying that the card contains detailed  information")
-    public void filteringReportsByCategory() {
+    public void filteringReportsByCategory() throws InterruptedException {
         mainPage.videoPageOpen();
         VideoPage videoPage = new VideoPage(driver);
-                videoPage.clickMoreFilters();
+        videoPage.clickMoreFilters();
+        videoPage.clickToCollapseCategory();
+        videoPage.clickAndCheckInputToFilter();
         logger.info("Card contains all necessary information. Test viewingDetailedInformationAboutEvent is passed");
     }
 

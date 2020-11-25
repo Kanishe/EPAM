@@ -139,6 +139,7 @@ public class EpamEventTest {
     @Story("Extend events EPAM")
     @Description("This case verifying that the card contains detailed  information")
     public void filteringReportsByCategory() {
+        mainPage.videoPageOpen();
 
         logger.info("Card contains all necessary information. Test viewingDetailedInformationAboutEvent is passed");
     }

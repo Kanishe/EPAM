@@ -18,6 +18,9 @@ public class MainPage extends AncestorPage{
     @FindBy(xpath = "//a[@class = 'nav-link' and @href = '/events']")
     private static WebElement linkToEventsPage;
 
+    @FindBy(xpath = "//div[@class = 'evnt-platform-header']//a[contains(@href, 'Video')]")
+    public static WebElement linkToVideoPage;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -34,5 +37,12 @@ public class MainPage extends AncestorPage{
         logger.info("Event page is opened - " + driver.getTitle());
         Allure.addAttachment("Epam Events page", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         return new EventPage(driver);
+    }
+    @Step("The Video Page is open")
+    public VideoPage videoPageOpen(){
+        explicitWaitElement(linkToVideoPage).click();
+        logger.info("Video page is opened" + driver.getTitle());
+        Allure.addAttachment("Epam Video page", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+        return new VideoPage(driver);
     }
 }

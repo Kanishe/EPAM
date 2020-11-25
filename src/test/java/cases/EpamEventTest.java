@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import pages.CardEventDetailsPage;
 import pages.EventPage;
 import pages.MainPage;
+import pages.VideoPage;
 import utils.WebDriverFactory;
 import utils.WebDriverType;
 
@@ -140,7 +141,8 @@ public class EpamEventTest {
     @Description("This case verifying that the card contains detailed  information")
     public void filteringReportsByCategory() {
         mainPage.videoPageOpen();
-
+        VideoPage videoPage = new VideoPage(driver);
+                videoPage.clickMoreFilters();
         logger.info("Card contains all necessary information. Test viewingDetailedInformationAboutEvent is passed");
     }
 

@@ -10,7 +10,10 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.ByteArrayInputStream;
+import java.util.concurrent.TimeUnit;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VideoPage  extends AncestorPage{
@@ -55,6 +58,16 @@ public class VideoPage  extends AncestorPage{
     @FindBy (xpath = "//div[@class ='evnt-tag evnt-filters-tags with-delete-elem']/label[contains(text(),'Testing')]")
     public static WebElement selectedCategory;
 
+    @FindBy (xpath = "//div[@class='evnt-search-filter']/input")
+    public static WebElement inputKeywords;
+
+
+    @FindBy (xpath = "//div[@class='evnt-talks-column cell-6']")
+    public static WebElement videosWithKeyWordQA;
+
+
+
+
 
 
 
@@ -91,5 +104,25 @@ public class VideoPage  extends AncestorPage{
         assertEquals(language,"ENGLISH");
         assertEquals(location,"Belarus");
         assertEquals(category,"Testing");
+    }
+
+    @Step("input Keywords QA")
+    public void inputKeyWordsInSearchField() throws InterruptedException {
+        explicitWaitElement(inputKeywords).click();
+        logger.info("input Keywords QA");
+        explicitWaitElement(inputKeywords).sendKeys("QA");
+        explicitWaitElement(inputKeywords).getSize();
+//        Thread.sleep(2000);
+        Allure.addAttachment("input Keywords QA", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+
+    }
+    @Step("check Keywords QA in Event Crad")
+    public void checkKeyWordInEventVideo(String keywordInVideo) throws InterruptedException {
+        explicitWaitElement(videosWithKeyWordQA).isEnabled();
+        String video = explicitWaitElement(videosWithKeyWordQA).getText();
+        logger.info("check Keywords QA in Event Crad");
+        assertThat(video,containsString(keywordInVideo));
+        Allure.addAttachment("input Keywords QA", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+
     }
 }

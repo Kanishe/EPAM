@@ -20,7 +20,7 @@ public abstract class AncestorPage {
     }
 //
     protected WebElement explicitWaitElement(WebElement element) {
-        return new WebDriverWait(driver, 10)
+        return new WebDriverWait(driver, 40)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 }

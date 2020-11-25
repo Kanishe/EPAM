@@ -10,21 +10,17 @@ import org.apache.logging.log4j.Logger;
 import org.exparity.hamcrest.date.Moments;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import pages.CardEventDetailsPage;
 import pages.EventPage;
 import pages.MainPage;
 import pages.VideoPage;
 import utils.WebDriverFactory;
 import utils.WebDriverType;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.exparity.hamcrest.date.IsBefore.before;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static pages.EventPage.checkBoxCanada;
@@ -145,13 +141,22 @@ public class EpamEventTest {
         videoPage.clickMoreFilters();
         videoPage.clickToCollapseCategory();
         videoPage.clickAndCheckInputToFilter();
-        logger.info("Card contains all necessary information. Test viewingDetailedInformationAboutEvent is passed");
+        logger.info("Card contains all necessary information. Test filteringReportsByCategory is passed");
     }
 
-
-
-
-
+    @Order(7)
+    @Test
+    @Epic("Extend business EPAM")
+    @Feature("EventsEPAM")
+    @Story("Extend events EPAM")
+    @Description("This case verifying searching video by key word 'QA'")
+    public void searchReportsByKeyword() throws InterruptedException {
+        mainPage.videoPageOpen();
+        VideoPage videoPage = new VideoPage(driver);
+        videoPage.inputKeyWordsInSearchField();
+        videoPage.checkKeyWordInEventVideo("QA");
+        logger.info("Selected by QA keyword Event contains keyword QA in body. Test searchReportsByKeyword is passed");
+    }
 
     @AfterEach
     public void tearDown() {

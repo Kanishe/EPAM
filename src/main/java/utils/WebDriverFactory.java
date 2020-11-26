@@ -18,7 +18,7 @@ public class WebDriverFactory {
                 break;
             }
             case FIREFOX: {
-                capabilities.setBrowserName("FIREFOX");
+                capabilities.setBrowserName("firefox");
                 capabilities.setVersion("82.0");
                 break;
             }

@@ -41,7 +41,7 @@ public class EpamEventTest {
         mainPage.open();
     }
 
-    @Order(1)
+    @Order(7)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")
@@ -144,7 +144,7 @@ public class EpamEventTest {
         logger.info("Card contains all necessary information. Test filteringReportsByCategory is passed");
     }
 
-    @Order(7)
+    @Order(1)
     @Test
     @Epic("Extend business EPAM")
     @Feature("EventsEPAM")

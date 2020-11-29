@@ -23,7 +23,7 @@ public class WebDriverFactory {
                 break;
             }
             case OPERA:{
-                    capabilities.setBrowserName("OPERA");
+                    capabilities.setBrowserName("opera");
                     capabilities.setVersion("70.0");
                 break;
             }
